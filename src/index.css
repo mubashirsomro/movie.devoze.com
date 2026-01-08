@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Bebas+Neue&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  html {
+    font-size: 80%;
+  }
+
+
+  :root {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 85% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 0 85% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 85% 55%;
+
+    --radius: 0.75rem;
+
+    /* Custom streaming theme colors */
+    --stream-bg: 0 0% 4%;
+    --stream-surface: 0 0% 8%;
+    --stream-card: 0 0% 10%;
+    --stream-card-hover: 0 0% 14%;
+    --stream-accent: 0 85% 55%;
+    --stream-accent-glow: 0 100% 60%;
+    --stream-gold: 45 100% 50%;
+    --stream-text: 0 0% 98%;
+    --stream-text-muted: 0 0% 60%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(180deg, transparent 0%, hsl(var(--stream-bg)) 100%);
+    --gradient-card: linear-gradient(180deg, transparent 50%, hsl(var(--stream-bg) / 0.9) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(var(--stream-accent)) 0%, hsl(var(--stream-accent-glow)) 100%);
+
+    --sidebar-background: 0 0% 6%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 0 85% 55%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 15%;
+    --sidebar-ring: 0 85% 55%;
+  }
+
+  .dark {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 85% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 0 85% 55%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 85% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased overflow-x-hidden pb-20 md:pb-0;
+    font-family: 'Inter', sans-serif;
+
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.05em;
+  }
+}
+
+@layer components {
+  .movie-card {
+    @apply relative overflow-hidden rounded-lg bg-card transition-all duration-300 cursor-pointer;
+    @apply hover:scale-105 hover:z-10;
+  }
+
+  .movie-card::after {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(180deg, transparent 40%, hsl(var(--stream-bg) / 0.95) 100%);
+  }
+
+  .movie-card:hover::after {
+    @apply opacity-100;
+  }
+
+  .movie-card-overlay {
+    @apply absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300;
+    background: hsl(var(--stream-bg) / 0.6);
+  }
+
+  .movie-card:hover .movie-card-overlay {
+    @apply opacity-100;
+  }
+
+  .play-button {
+    @apply w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300;
+    background: linear-gradient(135deg, hsl(var(--stream-accent)) 0%, hsl(var(--stream-accent-glow)) 100%);
+    @apply hover:scale-110;
+    box-shadow: 0 0 30px hsl(var(--stream-accent) / 0.5);
+  }
+
+  .section-title {
+    @apply text-2xl md:text-3xl font-bold tracking-wide text-foreground;
+    font-family: 'Bebas Neue', sans-serif;
+  }
+
+  .hero-gradient {
+    background: linear-gradient(180deg, transparent 0%, hsl(var(--stream-bg)) 100%);
+  }
+
+  .nav-link {
+    @apply relative text-muted-foreground hover:text-foreground transition-colors duration-200;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .glass-effect {
+    @apply backdrop-blur-xl;
+    background: hsl(var(--stream-bg) / 0.8);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 40px hsl(var(--stream-accent) / 0.3);
+  }
+
+  .rating-badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded text-sm font-medium;
+    background: linear-gradient(135deg, hsl(var(--stream-gold)) 0%, hsl(40 100% 45%) 100%);
+    color: hsl(0 0% 10%);
+  }
+
+  .quality-badge {
+    @apply px-2 py-0.5 rounded text-xs font-bold uppercase tracking-wider;
+    background: hsl(var(--stream-accent));
+    color: hsl(var(--primary-foreground));
+  }
+
+  .server-button {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200;
+    @apply bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground;
+  }
+
+  .server-button.active {
+    @apply bg-primary text-primary-foreground;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--stream-accent)) 0%, hsl(var(--stream-accent-glow)) 100%);
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
